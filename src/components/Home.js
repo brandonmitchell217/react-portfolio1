@@ -1,27 +1,56 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 // import '../index.css'
+import { gsap } from 'gsap'
+import { CSSRulePlugin } from 'gsap/CSSRulePlugin'
 
 function Home() {
+  gsap.registerPlugin(CSSRulePlugin)
+  useEffect(() => {
+    const rule = CSSRulePlugin.getRule('.title::before')
+    const tl = gsap
+      .timeline({ duration: 1 })
+      .from('.image', { duration: 1, x: '-100%' })
+      .from('.brandon', { y: '100%' })
+      .from('.mitchell', { y: '100%' }, '+=.25')
+      .from('.title', { x: '200%', opacity: 0 }, '+=.25')
+      .from(rule, { duration: 1, cssRule: { y: '100%' } }, '-=.45')
+      .from('.circle', { opacity: 0, stagger: 0.33 })
+      .from('span', { y: '100%', stagger: 0.5 })
+
+    // if (sizeOne.matches) {
+    //   const tl = gsap.timeline({ duration: 1.4, ease: 'circ.out' })
+    //   tl.from('.image', { duration: 1, x: '-100%' })
+    //   tl.from('.brandon h1', { y: '100%' }, '+=.25')
+    //   tl.from('.mitchell h1', { y: '-100%' }, '+=.5')
+    //   tl.from('.title h2', { x: '200%', opacity: 0 }, '+=.25')
+    //   tl.from(rule, { duration: 1, cssRule: { y: '100%' } }, '+=.15')
+    //   tl.from('.icons a', { x: '-150%', stagger: 0.2 })
+    // tl.from('.circle', { opacity: 0, stagger: 0.33 })
+    // tl.from('.spns span', { y: '100%', stagger: 0.5 })
+    //   tl.from('.fullNav ul li', { opacity: 0, stagger: 0.5 })
+    // }
+  })
+
   return (
     <Container>
       <Image>
-        <img src="../img/dude.jpg" />
+        <img src="../img/dude.jpg" className="image" />
       </Image>
       <Brandon>
-        <h1>Brandon</h1>
+        <h1 className="brandon">Brandon</h1>
       </Brandon>
       <Mitchell>
-        <h1>Mitchell</h1>
+        <h1 className="mitchell">Mitchell</h1>
       </Mitchell>
       <Title>
-        <h2>Front-End Developer</h2>
+        <h2 className="title">Front-End Developer</h2>
       </Title>
       <Spans>
         <span>Develop</span>
-        <Circle></Circle>
+        <Circle className="circle"></Circle>
         <span>Animate</span>
-        <Circle></Circle>
+        <Circle className="circle"></Circle>
         <span>Design</span>
       </Spans>
     </Container>
@@ -59,9 +88,9 @@ const Brandon = styled.div`
   text-transform: uppercase;
   position: absolute;
   right: 6%;
-  top: 37%;
+  top: 30vh;
   z-index: 2;
-  transform: translate(-6%, -37%);
+  transform: translateX(-6%);
   overflow: hidden;
 `
 
@@ -72,20 +101,19 @@ const Mitchell = styled.div`
   text-transform: uppercase;
   position: absolute;
   right: 2%;
-  top: 50%;
+  top: 41vh;
   z-index: 2;
-  transform: translate(-2%, -50%);
+  transform: translateX(-2%);
   overflow: hidden;
 `
 
 const Title = styled.div`
   position: absolute;
-  right: 7%;
-  top: 62%;
+  right: 7vw;
+  top: 55vh;
   z-index: 2;
-  transform: translate(-7%, -62%);
 
-  h2 {
+  .title {
     position: relative;
     padding: 0 10px;
     font-family: 'Work Sans', sans-serif;

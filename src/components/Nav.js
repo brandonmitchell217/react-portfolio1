@@ -6,13 +6,16 @@ import '../index.css'
 import styled from 'styled-components'
 
 function Nav() {
-  const navMenu = document.querySelector('.navMenu')
-  function menuOpen(e) {
-    e.preventDefault()
+  function menuOpen() {
+    const navMenu = document.querySelector('.navMenu')
     navMenu.style.transform = 'translateY(0)'
   }
-  function menuClose(e) {
-    e.preventDefault()
+  function menuClose() {
+    const navMenu = document.querySelector('.navMenu')
+    navMenu.style.transform = 'translateY(-100%)'
+  }
+  function navClear() {
+    const navMenu = document.querySelector('.navMenu')
     navMenu.style.transform = 'translateY(-100%)'
   }
 
@@ -21,17 +24,17 @@ function Nav() {
       <FullNav>
         <ul>
           <li>
-            <Link to="about" className="navBtn">
+            <Link to="about" className="navBtn" onClick={navClear}>
               About
             </Link>
           </li>
           <li>
-            <Link to="projects" className="navBtn">
+            <Link to="projects" className="navBtn" onClick={navClear}>
               Projects
             </Link>
           </li>
           <li>
-            <Link to="contact" className="navBtn">
+            <Link to="contact" className="navBtn" onClick={navClear}>
               Contact
             </Link>
           </li>
@@ -40,13 +43,13 @@ function Nav() {
       <MobileNav>
         <FontAwesomeIcon icon={faBars} className="burger" onClick={menuOpen} />
         <NavMenu className="navMenu">
-          <Link to="about" className="navBtn">
+          <Link to="about" className="navBtn" onClick={navClear}>
             About
           </Link>
-          <Link to="projects" className="navBtn">
+          <Link to="projects" className="navBtn" onClick={navClear}>
             Projects
           </Link>
-          <Link to="contact" className="navBtn">
+          <Link to="contact" className="navBtn" onClick={navClear}>
             Contact
           </Link>
           <FontAwesomeIcon
