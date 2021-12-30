@@ -9,28 +9,29 @@ function Home() {
   useEffect(() => {
     const rule = CSSRulePlugin.getRule('.title::before')
     const tl = gsap
-      .timeline({ duration: 1 })
-      .from('.image', { duration: 1, x: '-100%' })
+      .timeline({ duration: 1, ease: 'sine.out' })
+      .from('.image', { x: '-100%' })
       .from('.brandon', { y: '100%' })
-      .from('.mitchell', { y: '100%' }, '+=.25')
+      .from('.mitchell', { y: '-100%' }, '+=.25')
       .from('.title', { x: '200%', opacity: 0 }, '+=.25')
       .from(rule, { duration: 1, cssRule: { y: '100%' } }, '-=.45')
       .from('.circle', { opacity: 0, stagger: 0.33 })
       .from('span', { y: '100%', stagger: 0.5 })
-
-    // if (sizeOne.matches) {
-    //   const tl = gsap.timeline({ duration: 1.4, ease: 'circ.out' })
-    //   tl.from('.image', { duration: 1, x: '-100%' })
-    //   tl.from('.brandon h1', { y: '100%' }, '+=.25')
-    //   tl.from('.mitchell h1', { y: '-100%' }, '+=.5')
-    //   tl.from('.title h2', { x: '200%', opacity: 0 }, '+=.25')
-    //   tl.from(rule, { duration: 1, cssRule: { y: '100%' } }, '+=.15')
-    //   tl.from('.icons a', { x: '-150%', stagger: 0.2 })
-    // tl.from('.circle', { opacity: 0, stagger: 0.33 })
-    // tl.from('.spns span', { y: '100%', stagger: 0.5 })
-    //   tl.from('.fullNav ul li', { opacity: 0, stagger: 0.5 })
-    // }
   })
+
+  //   // if (sizeOne.matches) {
+  //   //   const tl = gsap.timeline({ duration: 1.4, ease: 'circ.out' })
+  //   //   tl.from('.image', { duration: 1, x: '-100%' })
+  //   //   tl.from('.brandon h1', { y: '100%' }, '+=.25')
+  //   //   tl.from('.mitchell h1', { y: '-100%' }, '+=.5')
+  //   //   tl.from('.title h2', { x: '200%', opacity: 0 }, '+=.25')
+  //   //   tl.from(rule, { duration: 1, cssRule: { y: '100%' } }, '+=.15')
+  //   //   tl.from('.icons a', { x: '-150%', stagger: 0.2 })
+  //   // tl.from('.circle', { opacity: 0, stagger: 0.33 })
+  //   // tl.from('.spns span', { y: '100%', stagger: 0.5 })
+  //   //   tl.from('.fullNav ul li', { opacity: 0, stagger: 0.5 })
+  //   // }
+  // })
 
   return (
     <Container>
@@ -88,10 +89,13 @@ const Brandon = styled.div`
   text-transform: uppercase;
   position: absolute;
   right: 6%;
-  top: 30vh;
+  top: calc(29vh + 10px);
   z-index: 2;
   transform: translateX(-6%);
   overflow: hidden;
+  @media (max-width: 1100px) {
+    top: calc(29vh + 20px);
+  }
 `
 
 const Mitchell = styled.div`
@@ -101,10 +105,13 @@ const Mitchell = styled.div`
   text-transform: uppercase;
   position: absolute;
   right: 2%;
-  top: 41vh;
+  top: 40vh;
   z-index: 2;
   transform: translateX(-2%);
   overflow: hidden;
+  @media (max-width: 750px) {
+    top: 39vh;
+  }
 `
 
 const Title = styled.div`

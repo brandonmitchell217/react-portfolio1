@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { gsap } from 'gsap'
 import '../index.css'
 import styled from 'styled-components'
 
@@ -9,6 +10,11 @@ function Nav() {
   function menuOpen() {
     const navMenu = document.querySelector('.navMenu')
     navMenu.style.transform = 'translateY(0)'
+    // With gsap, may need to remove css transition - styled components
+    // const tl1 = gsap
+    //   .timeline({ duration: 0.1, ease: 'sine.out' })
+    //   .to(navMenu, { y: 0 })
+    //   .to('.mobileNav a', { y: '-20px', stagger: 0.5 }, '-=.5')
   }
   function menuClose() {
     const navMenu = document.querySelector('.navMenu')
@@ -19,9 +25,15 @@ function Nav() {
     navMenu.style.transform = 'translateY(-100%)'
   }
 
+  useEffect(() => {
+    const tl = gsap
+      .timeline({ duration: 1, delay: 3, ease: 'sine.out' })
+      .from('.fullNav ul li', { opacity: 0, stagger: 0.5 })
+  })
+
   return (
     <Container>
-      <FullNav>
+      <FullNav className="fullNav">
         <ul>
           <li>
             <Link to="about" className="navBtn" onClick={navClear}>
@@ -40,7 +52,7 @@ function Nav() {
           </li>
         </ul>
       </FullNav>
-      <MobileNav>
+      <MobileNav className="mobileNav">
         <FontAwesomeIcon icon={faBars} className="burger" onClick={menuOpen} />
         <NavMenu className="navMenu">
           <Link to="about" className="navBtn" onClick={navClear}>
