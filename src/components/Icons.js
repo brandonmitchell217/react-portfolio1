@@ -45,7 +45,7 @@ const Container = styled.div`
     color: #e6ebe0;
     font-size: 1.625rem;
     font-size: clamp(1.625rem, 1.55rem + 0.375vw, 2rem);
-    transition: all 0.3s ease-in-out;
+    transition: all 500ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 
     &:hover {
       color: #d45113;

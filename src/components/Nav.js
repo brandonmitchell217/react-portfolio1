@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,6 +6,16 @@ import '../index.css'
 import styled from 'styled-components'
 
 function Nav() {
+  const navMenu = document.querySelector('.navMenu')
+  function menuOpen(e) {
+    e.preventDefault()
+    navMenu.style.transform = 'translateY(0)'
+  }
+  function menuClose(e) {
+    e.preventDefault()
+    navMenu.style.transform = 'translateY(-100%)'
+  }
+
   return (
     <Container>
       <FullNav>
@@ -28,8 +38,8 @@ function Nav() {
         </ul>
       </FullNav>
       <MobileNav>
-        <FontAwesomeIcon icon={faBars} className="burger" />
-        <NavMenu>
+        <FontAwesomeIcon icon={faBars} className="burger" onClick={menuOpen} />
+        <NavMenu className="navMenu">
           <Link to="about" className="navBtn">
             About
           </Link>
@@ -39,7 +49,11 @@ function Nav() {
           <Link to="contact" className="navBtn">
             Contact
           </Link>
-          <FontAwesomeIcon icon={faTimes} className="times" />
+          <FontAwesomeIcon
+            icon={faTimes}
+            className="times"
+            onClick={menuClose}
+          />
         </NavMenu>
       </MobileNav>
     </Container>
@@ -76,7 +90,7 @@ const FullNav = styled.div`
     color: #e6ebe0;
     text-decoration: none;
     text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
+    transition: all 500ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 
     &:hover {
       color: #d45113;
@@ -87,7 +101,11 @@ const FullNav = styled.div`
   }
 `
 
-const MobileNav = styled.div``
+const MobileNav = styled.div`
+  @media (min-width: 751px) {
+    display: none;
+  }
+`
 
 const NavMenu = styled.div`
   height: 100vh;
@@ -100,7 +118,8 @@ const NavMenu = styled.div`
   justify-content: space-evenly;
   align-items: center;
   background: #000;
-  display: none;
+  transform: translateY(-100%);
+  transition: all 350ms cubic-bezier(0.13, 0.52, 0.83, 0.67);
 
   a {
     font-family: 'Source Code Pro', monospace;
@@ -109,7 +128,7 @@ const NavMenu = styled.div`
     color: #e6ebe0;
     text-decoration: none;
     text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
+    transition: all 500ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
 
     &:hover {
       color: #d45113;

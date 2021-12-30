@@ -124,8 +124,13 @@ const Spans = styled.div`
 `
 
 const Circle = styled.div`
-  width: min(30px, 5vw);
-  height: min(30px, 4vh);
+  width: 30px;
+  height: 30px;
   background-color: #246eb9;
   border-radius: 50%;
+
+  @media (max-width: 750px) {
+    height: 24px;
+    width: 24px;
+  }
 `
